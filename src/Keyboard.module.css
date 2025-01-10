@@ -1,0 +1,36 @@
+.btn {
+  width: 100%;
+  border: 3px solid black;
+  background: none;
+  aspect-ratio: 1 / 1;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  padding: .5rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: black;
+}
+
+.btn.correct {
+  background-color: green;
+  color: white;
+}
+
+.btn.incorrect {
+  background-color: grey;
+  color: white;
+}
+
+.btn.hint {
+  background-color: yellow;
+  color: white;
+}
+
+.btn.inactive {
+  opacity: .3;
+}
+
+.btn:hover:not(:disabled),
+.btn:focus:not(:disabled) {
+  background-color: hsl(200, 100%, 75%);
+}

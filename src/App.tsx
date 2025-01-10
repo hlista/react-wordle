@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react"
+import { Keyboard } from "./Keyboard"
 
 function App() {
   // word to guess
@@ -127,9 +128,21 @@ function App() {
   console.log(incorrectLetters)
   console.log(hintLetters)
   return (
-    <div style={{ fontSize: "2rem", textAlign: "center" }}>
-      {isWinner && "Winner! - Refresh to try again"}
-      {isLoser && "Nice Try - Refresh to try again"}
+    <div style={{
+      maxWidth: "800px",
+      display: "flex",
+      flexDirection: "column",
+      gap: "2rem",
+      margin: "0 auto",
+      alignItems: "center"
+    }}>
+      <div style={{ fontSize: "2rem", textAlign: "center" }}>
+        {isWinner && "Winner! - Refresh to try again"}
+        {isLoser && "Nice Try - Refresh to try again"}
+      </div>
+      <div style={{ alignSelf: "stretch" }}>
+        <Keyboard correctLetters={correctLetters} hintLetters={hintLetters} incorrectLetters={incorrectLetters} />
+      </div>
     </div>
   )
 }
