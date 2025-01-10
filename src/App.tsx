@@ -47,23 +47,33 @@ function App() {
   const evalSelectedLetters = useCallback(() => {
     const selectedWord = selectedLetters.join('')
     const wordToGuessArray = wordToGuess.split('')
+    const newCorrectLetters = [...correctLetters]
+    const newHintLetters = [...hintLetters]
+    const newIncorrectLetters = [...incorrectLetters]
     if (selectedLetters.length < 5) return
-    // selectedLetters.forEach((letter, index) => {
-    //   if (letter === wordToGuessArray[index] && !correctLetters.includes(letter)) {
-    //     setCorrectLetters(currentLetters => [...currentLetters, letter])
-    //   } else if (wordToGuessArray.includes(letter) && !correctLetters.includes(letter) && !hintLetters.includes(letter)) {
-    //     setHintLetters(currentLetters => [...currentLetters, letter])
-    //   } else if (!wordToGuessArray.includes(letter) && !incorrectLetters.includes(letter)) {
-    //     setIncorrectLetters(currentLetters => [...currentLetters, letter])
-    //   }
-    // })
+    selectedLetters.forEach((letter, index) => {
+      if (letter === wordToGuessArray[index] && !newCorrectLetters.includes(letter)) {
+        newCorrectLetters.push(letter)
+        if (newHintLetters.includes(letter)) {
+          newHintLetters.filter((hintLetter) => hintLetter === letter)
+        }
+      } else if (wordToGuessArray.includes(letter) && !newCorrectLetters.includes(letter) && !newHintLetters.includes(letter)) {
+        newHintLetters.push(letter)
+      } else if (!wordToGuessArray.includes(letter) && !newIncorrectLetters.includes(letter)) {
+        newIncorrectLetters.push(letter)
+      }
+    })
+
+    setCorrectLetters(newCorrectLetters)
+    setHintLetters(newHintLetters)
+    setIncorrectLetters(newIncorrectLetters)
 
     if (wordToGuess === selectedWord) {
       setIsWinner(true)
     } else {
       setGuessedWords(currentWords => [...currentWords, selectedWord])
     }
-  }, [selectedLetters])
+  }, [selectedLetters, guessedWords, correctLetters, hintLetters, incorrectLetters])
 
   // update selectedLetters on keypress
   useEffect(() => {
@@ -80,7 +90,7 @@ function App() {
     return () => {
       document.removeEventListener("keypress", handler)
     }
-  }, [selectedLetters])
+  }, [selectedLetters, guessedWords])
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -96,7 +106,7 @@ function App() {
     return () => {
       document.removeEventListener("keypress", handler)
     }
-  }, [selectedLetters])
+  }, [selectedLetters, guessedWords, correctLetters, hintLetters, incorrectLetters])
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -113,6 +123,9 @@ function App() {
     }
   }, [selectedLetters])
 
+  console.log(correctLetters)
+  console.log(incorrectLetters)
+  console.log(hintLetters)
   return (
     <div style={{ fontSize: "2rem", textAlign: "center" }}>
       {isWinner && "Winner! - Refresh to try again"}
