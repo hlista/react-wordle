@@ -24,18 +24,30 @@ function App() {
   const isLoser = guessedWords.length > 5
 
   const addSelectedLetters = useCallback((letter: string) => {
-    if (selectedLetters.includes(letter) || selectedLetters.length === 5) return
+    if (selectedLetters.length === 5) return
 
     setSelectedLetters(currentLetters => [...currentLetters, letter])
   }, [selectedLetters])
 
   const evalSelectedLetters = useCallback(() => {
     const selectedWord = selectedLetters.join('')
+    const wordToGuessArray = wordToGuess.split('')
+    if (selectedLetters.length < 5) return
+    selectedLetters.forEach((letter, index) => {
+      if (letter === wordToGuessArray[index] && !correctLetters.includes(letter)) {
+        setCorrectLetters(currentLetters => [...currentLetters, letter])
+      }
+      if (wordToGuessArray.includes(letter) && !correctLetters.includes(letter) && !hintLetters.includes(letter)) {
+        setHintLetters(currentLetters => [...currentLetters, letter])
+      }
+      if (!wordToGuessArray.includes(letter)) {
+        setIncorrectLetters(currentLetters => [...currentLetters, letter])
+      }
+    })
     if (wordToGuess === selectedWord) {
       setIsWinner(true)
     } else {
       setGuessedWords(currentWords => [...currentWords, selectedWord])
-
     }
   }, [selectedLetters])
 
@@ -44,7 +56,7 @@ function App() {
     const handler = (e: KeyboardEvent) => {
       const key = e.key
       if (!key.match(/^[a-z]$/)) return
-
+      console.log(selectedLetters)
       e.preventDefault()
       addSelectedLetters(key)
     }
@@ -60,7 +72,7 @@ function App() {
     const handler = (e: KeyboardEvent) => {
       const key = e.key
       if (key !== "Enter") return
-
+      console.log("here")
       e.preventDefault()
       evalSelectedLetters()
       setSelectedLetters([])
@@ -74,9 +86,10 @@ function App() {
   }, [selectedLetters])
 
   return (
-      <div>
-        Hello!
-      </div>
+    <div style={{ fontSize: "2rem", textAlign: "center" }}>
+      {isWinner && "Winner! - Refresh to try again"}
+      {isLoser && "Nice Try - Refresh to try again"}
+    </div>
   )
 }
 
