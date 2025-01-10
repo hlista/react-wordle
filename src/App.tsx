@@ -56,7 +56,7 @@ function App() {
       if (letter === wordToGuessArray[index] && !newCorrectLetters.includes(letter)) {
         newCorrectLetters.push(letter)
         if (newHintLetters.includes(letter)) {
-          newHintLetters.filter((hintLetter) => hintLetter === letter)
+          newHintLetters.splice(newHintLetters.indexOf(letter), 1)
         }
       } else if (wordToGuessArray.includes(letter) && !newCorrectLetters.includes(letter) && !newHintLetters.includes(letter)) {
         newHintLetters.push(letter)
