@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react"
 import { Keyboard } from "./Keyboard"
+import { WordleBoard } from "./WordleBoard"
 
 function App() {
   // word to guess
@@ -141,6 +142,7 @@ function App() {
         {isLoser && "Nice Try - Refresh to try again"}
       </div>
       <div style={{ alignSelf: "stretch" }}>
+        <WordleBoard guessedWords={guessedWords} selectedLetters={selectedLetters} />
         <Keyboard correctLetters={correctLetters} hintLetters={hintLetters} incorrectLetters={incorrectLetters} />
       </div>
     </div>
