@@ -72,9 +72,8 @@ function App() {
 
     if (wordToGuess === selectedWord) {
       setIsWinner(true)
-    } else {
-      setGuessedWords(currentWords => [...currentWords, selectedWord])
     }
+    setGuessedWords(currentWords => [...currentWords, selectedWord])
   }, [selectedLetters, guessedWords, correctLetters, hintLetters, incorrectLetters])
 
   // update selectedLetters on keypress
@@ -125,18 +124,13 @@ function App() {
     }
   }, [selectedLetters])
 
-  console.log(correctLetters)
-  console.log(incorrectLetters)
-  console.log(hintLetters)
   return (
     <div style={{
-      maxWidth: "800px",
-      minWidth: "500px",
-      display: "flex",
-      flexDirection: "column",
-      gap: "2rem",
+      width: "100%",
+      maxWidth: "500px",
       margin: "0 auto",
-      alignItems: "center"
+      display: "flex",
+      flexDirection: "column"
     }}>
       <div style={{ fontSize: "2rem", textAlign: "center" }}>
         {isWinner && "Winner! - Refresh to try again"}
