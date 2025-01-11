@@ -3,20 +3,29 @@ import styles from "./WordleBoard.module.css"
 type WordleBoardProps = {
   guessedWords: string[]
   selectedLetters: string[]
+  wordToGuess: string
 }
 
-function generateEmptyTile() {
-
+function evalStyle(wordToGuessArray: string[], guessedWordArray: string[], index: number) {
+  if (wordToGuessArray[index] === guessedWordArray[index]) {
+    return styles.correctTile
+  }
+  if (wordToGuessArray.includes(guessedWordArray[index])) {
+    return styles.hintTile
+  }
+  return styles.tile
 }
 
 export function WordleBoard({
   guessedWords,
-  selectedLetters
+  selectedLetters,
+  wordToGuess
 }: WordleBoardProps) {
   const guessedWordsLength = guessedWords.length
   const selectedLettersLength = selectedLetters.length
   const rowNumberArray = [1, 2, 3, 4, 5, 6]
   const columnNumberArray = [1, 2, 3, 4, 5]
+  const wordToGuessArray = wordToGuess.split('')
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center"}}>
       <div className={`${styles.board}`}>
@@ -25,19 +34,19 @@ export function WordleBoard({
             if (rowNum <= guessedWordsLength) {
               const splitWord = guessedWords[rowNum - 1].split('')
               return <div className={`${styles.row}`}>
-                <div className={`${styles.tile}`}>
+                <div className={`${evalStyle(wordToGuessArray, splitWord, 0)}`}>
                   {splitWord[0]}
                 </div>
-                <div className={`${styles.tile}`}>
+                <div className={`${evalStyle(wordToGuessArray, splitWord, 1)}`}>
                   {splitWord[1]}
                 </div>
-                <div className={`${styles.tile}`}>
+                <div className={`${evalStyle(wordToGuessArray, splitWord, 2)}`}>
                   {splitWord[2]}
                 </div>
-                <div className={`${styles.tile}`}>
+                <div className={`${evalStyle(wordToGuessArray, splitWord, 3)}`}>
                   {splitWord[3]}
                 </div>
-                <div className={`${styles.tile}`}>
+                <div className={`${evalStyle(wordToGuessArray, splitWord, 4)}`}>
                   {splitWord[4]}
                 </div>
               </div>
