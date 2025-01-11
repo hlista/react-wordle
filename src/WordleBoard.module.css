@@ -29,7 +29,7 @@
   border: 2px solid;
 }
 
-.correctTile {
+.tileCorrect {
   width: 100%;
   display: inline-flex;
   justify-content: center;
@@ -44,7 +44,7 @@
   background-color: green;
 }
 
-.hintTile {
+.tileHint {
   width: 100%;
   display: inline-flex;
   justify-content: center;
@@ -57,4 +57,19 @@
   text-transform: uppercase;
   border: 2px solid;
   background-color: yellow;
+}
+
+.tileIncorrect {
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: bold;
+  vertical-align: middle;
+  box-sizing: border-box;
+  text-transform: uppercase;
+  border: 2px solid;
+  background-color: grey;
 }

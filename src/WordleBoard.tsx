@@ -8,12 +8,12 @@ type WordleBoardProps = {
 
 function evalStyle(wordToGuessArray: string[], guessedWordArray: string[], index: number) {
   if (wordToGuessArray[index] === guessedWordArray[index]) {
-    return styles.correctTile
+    return styles.tileCorrect
   }
   if (wordToGuessArray.includes(guessedWordArray[index])) {
-    return styles.hintTile
+    return styles.tileHint
   }
-  return styles.tile
+  return styles.tileIncorrect
 }
 
 export function WordleBoard({
