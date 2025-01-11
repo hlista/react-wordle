@@ -8,12 +8,12 @@ type WordleBoardProps = {
 
 function evalStyle(wordToGuessArray: string[], guessedWordArray: string[], index: number) {
   if (wordToGuessArray[index] === guessedWordArray[index]) {
-    return styles.tileCorrect
+    return styles.correct
   }
   if (wordToGuessArray.includes(guessedWordArray[index])) {
-    return styles.tileHint
+    return styles.hint
   }
-  return styles.tileIncorrect
+  return styles.incorrect
 }
 
 export function WordleBoard({
@@ -34,19 +34,19 @@ export function WordleBoard({
             if (rowNum <= guessedWordsLength) {
               const splitWord = guessedWords[rowNum - 1].split('')
               return <div className={`${styles.row}`}>
-                <div className={`${evalStyle(wordToGuessArray, splitWord, 0)}`}>
+                <div className={`${styles.tile} ${evalStyle(wordToGuessArray, splitWord, 0)}`}>
                   {splitWord[0]}
                 </div>
-                <div className={`${evalStyle(wordToGuessArray, splitWord, 1)}`}>
+                <div className={`${styles.tile} ${evalStyle(wordToGuessArray, splitWord, 1)}`}>
                   {splitWord[1]}
                 </div>
-                <div className={`${evalStyle(wordToGuessArray, splitWord, 2)}`}>
+                <div className={`${styles.tile} ${evalStyle(wordToGuessArray, splitWord, 2)}`}>
                   {splitWord[2]}
                 </div>
-                <div className={`${evalStyle(wordToGuessArray, splitWord, 3)}`}>
+                <div className={`${styles.tile} ${evalStyle(wordToGuessArray, splitWord, 3)}`}>
                   {splitWord[3]}
                 </div>
-                <div className={`${evalStyle(wordToGuessArray, splitWord, 4)}`}>
+                <div className={`${styles.tile} ${evalStyle(wordToGuessArray, splitWord, 4)}`}>
                   {splitWord[4]}
                 </div>
               </div>

@@ -29,6 +29,41 @@ const KEYS = [
   "z",
 ]
 
+const KEYROWONE = [
+  "q",
+  "w",
+  "e",
+  "r",
+  "t",
+  "y",
+  "u",
+  "i",
+  "o",
+  "p",
+]
+
+const KEYROWTWO = [
+  "a",
+  "s",
+  "d",
+  "f",
+  "g",
+  "h",
+  "j",
+  "k",
+  "l"
+]
+
+const KEYROWTHREE = [
+  "z",
+  "x",
+  "c",
+  "v",
+  "b",
+  "n",
+  "m",
+]
+
 type KeyboardProps = {
   correctLetters: string[]
   hintLetters: string[]
@@ -48,23 +83,73 @@ export function Keyboard({
 }: KeyboardProps) {
   return (
     <div
-      style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(75px, 1fr))", gap: ".5rem"}}
+      style={{ height: "200px"}}
     >
-      {KEYS.map(key => {
-          const isCorrect = correctLetters.includes(key)
-          const isHint = hintLetters.includes(key)
-          const isIncorrect = incorrectLetters.includes(key)
-          return (
-            <button
-              //onClick={() => addGuessedLetter(key)}
-              className={`${styles.btn} ${isCorrect ? styles.correct: ""} ${isHint ? styles.hint: ""} ${isIncorrect ? styles.incorrect: ""}`}
-              key={key}
-            >
-              {key}
-            </button>
-          )
-        })
-      }
+      <div style={{display: "flex", width: "100%", margin: "0 auto 8px"}}>
+        {
+          KEYROWONE.map(key => {
+            const isCorrect = correctLetters.includes(key)
+            const isHint = hintLetters.includes(key)
+            const isIncorrect = incorrectLetters.includes(key)
+            return (
+              <button
+                //onClick={() => addGuessedLetter(key)}
+                className={`${styles.btn} ${isCorrect ? styles.correct: ""} ${isHint ? styles.hint: ""} ${isIncorrect ? styles.incorrect: ""}`}
+                key={key}
+              >
+                {key}
+              </button>
+            )
+          })
+        }
+      </div>
+      <div style={{display: "flex", width: "100%", margin: "0 auto 8px"}}>
+        {
+          KEYROWTWO.map(key => {
+            const isCorrect = correctLetters.includes(key)
+            const isHint = hintLetters.includes(key)
+            const isIncorrect = incorrectLetters.includes(key)
+            return (
+              <button
+                //onClick={() => addGuessedLetter(key)}
+                className={`${styles.btn} ${isCorrect ? styles.correct: ""} ${isHint ? styles.hint: ""} ${isIncorrect ? styles.incorrect: ""}`}
+                key={key}
+              >
+                {key}
+              </button>
+            )
+          })
+        }
+      </div>
+      <div style={{display: "flex", width: "100%", margin: "0 auto 8px"}}>
+        {
+          <button className={`${styles.btn}`}>
+            {"Enter"}
+          </button>
+        }
+        {
+          KEYROWTHREE.map(key => {
+            const isCorrect = correctLetters.includes(key)
+            const isHint = hintLetters.includes(key)
+            const isIncorrect = incorrectLetters.includes(key)
+            return (
+              <button
+                //onClick={() => addGuessedLetter(key)}
+                className={`${styles.btn} ${isCorrect ? styles.correct: ""} ${isHint ? styles.hint: ""} ${isIncorrect ? styles.incorrect: ""}`}
+                key={key}
+              >
+                {key}
+              </button>
+            )
+          })
+        }
+        {
+          <button className={`${styles.btn}`}>
+            {"<x]"}
+          </button>
+        }
+      </div>
+      
 
     </div>
   )

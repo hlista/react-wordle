@@ -1,29 +1,38 @@
 .btn {
-  width: 100%;
-  border: 3px solid black;
-  background: none;
-  aspect-ratio: 1 / 1;
-  font-size: 2.5rem;
-  text-transform: uppercase;
-  padding: .5rem;
+  font-family: "nyt-franklin";
+  font-size: 1.25em;
   font-weight: bold;
+  border: 0;
+  padding: 0;
+  margin: 0 6px 0 0;
+  height: 58px;
+  border-radius: 4px;
   cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  background-color: rgb(174, 174, 174);
   color: black;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
 }
 
 .btn.correct {
   background-color: green;
-  color: white;
+  color: black;
 }
 
 .btn.incorrect {
-  background-color: grey;
-  color: white;
+  background-color: rgb(141, 141, 141);
+  color: black;
 }
 
 .btn.hint {
   background-color: yellow;
-  color: white;
+  color: black;
 }
 
 .btn.inactive {
