@@ -1,12 +1,15 @@
 import { useState, useEffect, useCallback } from "react"
 import { Keyboard } from "./Keyboard"
 import { WordleBoard } from "./WordleBoard"
+import words from "./wordList.json"
+
+function getWord() {
+  return words[Math.floor(Math.random() * words.length)]
+}
 
 function App() {
   // word to guess
-  const [wordToGuess, setWordToGuess] = useState(() => {
-    return "apple"
-  })
+  const [wordToGuess, setWordToGuess] = useState(getWord())
 
   // used for previous guesses
   const [guessedWords, setGuessedWords] = useState<string[]>([])
