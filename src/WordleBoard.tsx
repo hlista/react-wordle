@@ -6,11 +6,11 @@ type WordleBoardProps = {
   wordToGuess: string
 }
 
-function evalStyle(wordToGuessArray: string[], guessedWordArray: string[], index: number) {
+function evalStyle(wordToGuessArray: string[], guessedWordArray: string[], index: number, correctlyGuessedLetters: string[], incorrectlyGuessedLetters: string[]) {
   if (wordToGuessArray[index] === guessedWordArray[index]) {
     return styles.correct
   }
-  if (wordToGuessArray.includes(guessedWordArray[index])) {
+  if (wordToGuessArray.includes(guessedWordArray[index]) && !correctlyGuessedLetters.includes(guessedWordArray[index])) {
     return styles.hint
   }
   return styles.incorrect
@@ -33,20 +33,29 @@ export function WordleBoard({
           rowNumberArray.map(rowNum => {
             if (rowNum <= guessedWordsLength) {
               const splitWord = guessedWords[rowNum - 1].split('')
+              const correctlyGuessedLetters:string[] = []
+              const incorrectlyGuessedLetters:string[] = []
+              splitWord.forEach((value, i) => {
+                if (value === wordToGuessArray[i]){
+                  correctlyGuessedLetters.push(value)
+                } else {
+                  incorrectlyGuessedLetters.push(value)
+                }
+              })
               return <div className={`${styles.row}`}>
-                <div className={`${styles.tile} ${evalStyle(wordToGuessArray, splitWord, 0)}`}>
+                <div className={`${styles.tile} ${evalStyle(wordToGuessArray, splitWord, 0, correctlyGuessedLetters, incorrectlyGuessedLetters)}`}>
                   {splitWord[0]}
                 </div>
-                <div className={`${styles.tile} ${evalStyle(wordToGuessArray, splitWord, 1)}`}>
+                <div className={`${styles.tile} ${evalStyle(wordToGuessArray, splitWord, 1, correctlyGuessedLetters, incorrectlyGuessedLetters)}`}>
                   {splitWord[1]}
                 </div>
-                <div className={`${styles.tile} ${evalStyle(wordToGuessArray, splitWord, 2)}`}>
+                <div className={`${styles.tile} ${evalStyle(wordToGuessArray, splitWord, 2, correctlyGuessedLetters, incorrectlyGuessedLetters)}`}>
                   {splitWord[2]}
                 </div>
-                <div className={`${styles.tile} ${evalStyle(wordToGuessArray, splitWord, 3)}`}>
+                <div className={`${styles.tile} ${evalStyle(wordToGuessArray, splitWord, 3, correctlyGuessedLetters, incorrectlyGuessedLetters)}`}>
                   {splitWord[3]}
                 </div>
-                <div className={`${styles.tile} ${evalStyle(wordToGuessArray, splitWord, 4)}`}>
+                <div className={`${styles.tile} ${evalStyle(wordToGuessArray, splitWord, 4, correctlyGuessedLetters, incorrectlyGuessedLetters)}`}>
                   {splitWord[4]}
                 </div>
               </div>
